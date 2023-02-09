@@ -3,6 +3,7 @@ name: Process piyolog analytics data
 on:
   schedule:
     - cron: "0 12 * * *" # 毎日 12:00 に実行
+  workflow_dispatch: # 動作確認のため手動実行に対応
 
 jobs:
   numpy-test:
