@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # 動作確認のため手動実行に対応
 
 jobs:
-  numpy-test:
+  process-data:
     runs-on: ubuntu-latest
     steps:
       - name: Set yesterday date as env variable
