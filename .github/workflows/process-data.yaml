@@ -1,0 +1,39 @@
+name: Process piyolog analytics data
+
+on:
+  schedule:
+    - cron: "0 12 * * *" # 毎日 12:00 に実行
+
+jobs:
+  numpy-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set yesterday date as env variable
+        env:
+          TZ: "Asia/Tokyo"
+        run: echo "YESTERDAY_DATE=$(date +%Y%m%d --date '1 day ago')" >> $GITHUB_ENV
+      - name: Download yesterday piyolog data from Google Drive
+        uses: satackey/action-google-drive@v1
+        with:
+          skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+          download-from: piyolog-analytics/daily/${{ env.YESTERDAY_DATE }}.txt
+          download-to: ./data/daily/
+          google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+          google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+          architecture: "x64"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Python
+        env:
+          BABY_BIRTH_DATE: ${{ secrets.BABY_BIRTH_DATE }}
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          DATABASE: ${{ secrets.DATABASE }}
+        run: python ./process-data.py
