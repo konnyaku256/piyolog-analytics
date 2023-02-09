@@ -40,7 +40,8 @@ if DATA_TYPE == DATA_TYPE_MONTHLY:
 elif DATA_TYPE == DATA_TYPE_DAILY:
     path =  './data/daily'
 
-files = os.listdir(path)
+# 指定したディレクトリ下の .txt ファイル名一覧を取得
+files = [_ for _ in os.listdir(path) if _.endswith(r'.txt')]
 month_texts = []
 for filename in files:
     f = open(f'{path}/{filename}', encoding='utf-8')
