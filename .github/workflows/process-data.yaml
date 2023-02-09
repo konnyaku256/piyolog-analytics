@@ -9,6 +9,8 @@ jobs:
   process-data:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v3
       - name: Set yesterday date as env variable
         env:
           TZ: "Asia/Tokyo"
@@ -21,8 +23,6 @@ jobs:
           download-to: ./data/daily/
           google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
           google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      - name: Checkout GitHub repository
-        uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
