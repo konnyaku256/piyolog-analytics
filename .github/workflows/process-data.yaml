@@ -2,7 +2,7 @@ name: Process piyolog analytics data
 
 on:
   schedule:
-    - cron: "0 12 * * *" # 毎日 12:00 に実行
+    - cron: "0 3 * * *" # 毎日 12:00（JST）に実行（cron の設定は UTC のため、UTC+0900 を考慮）
   workflow_dispatch: # 動作確認のため手動実行に対応
 
 jobs:
