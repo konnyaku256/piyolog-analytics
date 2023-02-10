@@ -33,7 +33,6 @@ CN_AGE_OF_MONTH = 'age_of_month' # 月齢
 birth_date = datetime.datetime.strptime(os.getenv('BABY_BIRTH_DATE'), '%Y-%m-%d')
 
 # データ読込
-# TODO: Google Drive 上のファイルを読み込めるようにする
 path = ''
 if DATA_TYPE == DATA_TYPE_MONTHLY:
     path = './data/monthly'
