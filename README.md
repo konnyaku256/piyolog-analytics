@@ -24,6 +24,28 @@
    ※このスクリプトは GitHub Actions で毎日 12:00 に実行する
 3. Grafana から PlanetScale（MySQL）に接続してデータを分析する
 
+## skicka 用 OAuth2 トークン更新手順
+
+1. skicka の既存トークンを削除
+
+```
+$ rm ~/.skicka.tokencache.json
+```
+
+2. skicka で再認証
+
+```
+$ skicka ls
+```
+
+3. 更新したトークンを確認
+
+```
+cat ~/.skicka.tokencache.json
+```
+
+4. GitHub Secrets の `SKICKA_TOKENCACHE_JSON` に確認した文字列を設定
+
 ## 参考
 
 - [ぴよログのエクスポートデータを見える化する](https://qiita.com/kaji-tan/items/e1d6b4893dca8708a9ad)
